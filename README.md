@@ -4,3 +4,4 @@
 #
 # liguagens de implementação
 # Python (puro)
+# Python (Numpy)

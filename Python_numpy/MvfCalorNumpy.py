@@ -1,7 +1,8 @@
 import ReadFile as rf
 import Update as up
-import Grid as gr
+import GridNumpy as gr
 import time as tm
+import numpy as np
 
 
 def main():
@@ -26,16 +27,21 @@ def main():
     # ...
     t = 0.0
     dt = filesInf['dt']
-    k = nCells * [filesInf['prop'][0]]
-    ro = nCells * [filesInf['prop'][1]]
-    cp = nCells * [filesInf['prop'][2]]
-    cc = [filesInf['cce'], filesInf['ccd']]
-    sQ = nCells * [0.0]
-    a = [[0.0, 0.0, 0.0] for x in range(nCells)]
-    b = nCells * [0.0]
+
+    k  = np.full(nCells,filesInf['prop'][0],dtype = float)
+    ro = np.full(nCells,filesInf['prop'][1],dtype = float)
+    cp = np.full(nCells,filesInf['prop'][2],dtype = float)
+    
+    cc = np.array([filesInf['cce'], filesInf['ccd']])
+    sQ = np.zeros(nCells, dtype = float)
+
     nodeTemp = nPoints * [0.0]
     cellTemp  = nCells * [0.0]
     cellTemp0 = nCells * [filesInf['initialt']]
+
+    nodeTemp  = np.zeros(nPoints, dtype = float)
+    cellTemp0 = np.full(nCells,filesInf['initialt'],dtype = float)
+    cellTemp  = np.zeros(nCells, dtype = float)
     # .................................................................
 
     # ...
